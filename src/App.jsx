@@ -15,6 +15,7 @@ import ContactUs from "./Components/ContactUs";
 import Login from "./Components/Login";
 import SignUp from "./Components/SignUp";
 import ProfilePage from "./Components/ProfilePage";
+import Footer from "./Components/Footer";
 
 function App() {
   const navigate = useNavigate();
@@ -87,6 +88,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/profile" element={<ProfilePage />} />
       </Routes>
+      <Footer />
     </>
   );
 }

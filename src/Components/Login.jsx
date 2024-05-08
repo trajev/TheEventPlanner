@@ -7,7 +7,7 @@ import * as yup from "yup";
 import { useUserContext } from "../Contexts/UserContext";
 
 const userValidationSchema = yup.object({
-  data: yup.string().matches("@gmail.com").required("Enter Email or Username!"),
+  data: yup.string().required("Enter Email or Username!"),
   password: yup.string().min(8).required("Enter Password!"),
 });
 
