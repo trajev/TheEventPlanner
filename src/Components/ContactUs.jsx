@@ -11,7 +11,7 @@ const ContactUs = () => {
         reset
     } = useForm();
 
-    function handleForm( data ){
+    function handleForm(data) {
         console.log(data)
         //post data to backend api
         reset();
@@ -40,7 +40,7 @@ const ContactUs = () => {
                     </div>
                 </div>
 
-                <form action='post' className='w-[72%] text-center' onSubmit={ handleSubmit(handleForm) } >
+                <form action='post' className='w-[72%] text-center' onSubmit={handleSubmit(handleForm)} >
 
                     <div className='flex flex-col gap-4'>
                         <div className='flex justify-between'>
