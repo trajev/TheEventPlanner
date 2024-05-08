@@ -1,4 +1,3 @@
-import React from 'react'
 
 const BuyTickets = () => {
     return (
@@ -16,7 +15,7 @@ const BuyTickets = () => {
                         <hr className='h-2 border-zinc-300 my-4 w-[90%]' />
                     </div>
 
-                    <ul class="fa-ul flex flex-col justify-start px-6 gap-3 text-xl">
+                    <ul className="fa-ul flex flex-col justify-start px-6 gap-3 text-xl">
                         <li><span className="fa-li"><i className="fa fa-check font-bold"></i></span>Regular Seating</li>
                         <li><span className="fa-li"><i className="fa fa-check"></i></span>Coffee Break</li>
                         <li><span className="fa-li"><i className="fa fa-check"></i></span>Custom Badge</li>
@@ -38,7 +37,7 @@ const BuyTickets = () => {
                         <hr className='h-2 border-zinc-300 my-4 w-[90%]' />
                     </div>
 
-                    <ul class="fa-ul flex flex-col justify-start px-6 gap-3 text-xl">
+                    <ul className="fa-ul flex flex-col justify-start px-6 gap-3 text-xl">
                         <li><span className="fa-li"><i className="fa fa-check font-bold"></i></span>Regular Seating</li>
                         <li><span className="fa-li"><i className="fa fa-check"></i></span>Coffee Break</li>
                         <li><span className="fa-li"><i className="fa fa-check"></i></span>Custom Badge</li>
@@ -60,7 +59,7 @@ const BuyTickets = () => {
                         <hr className='h-2 border-zinc-300 my-4 w-[90%]' />
                     </div>
 
-                    <ul class="fa-ul flex flex-col justify-start px-6 gap-3 text-xl">
+                    <ul className="fa-ul flex flex-col justify-start px-6 gap-3 text-xl">
                         <li><span className="fa-li"><i className="fa fa-check font-bold"></i></span>Regular Seating</li>
                         <li><span className="fa-li"><i className="fa fa-check"></i></span>Coffee Break</li>
                         <li><span className="fa-li"><i className="fa fa-check"></i></span>Custom Badge</li>
