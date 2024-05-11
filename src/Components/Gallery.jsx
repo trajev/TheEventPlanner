@@ -9,15 +9,20 @@ function Gallery() {
     speed: 500,
     slidesToScroll: 2,
     slidesToShow: 5,
-
-    // className: "center",
-    // centerMode: true,
-    // centerPadding: "60px",
   };
+  
+  const settingsSmall = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToScroll: 2,
+    slidesToShow: 1,
+  };
+
   const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
-    <div className="w-full mb-16 ">
-      <h1 className="text-3xl font-semibold text-center">Gallery</h1>
+    <div className="w-full pb-16 bg-[#FFFBFB] ">
+      <h1 className="text-center text-2xl sm:text-4xl">Gallery</h1>
       <div className="mx-10 mt-12">
         <Slider {...settings}>
           {data.map((e, i) => (

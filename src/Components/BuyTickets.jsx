@@ -1,14 +1,14 @@
 
 const BuyTickets = () => {
     return (
-        <section className='bg-[#FFFBFB] flex flex-col items-center pt-10'>
-            <h1 className='font-semibold text-3xl uppercase'>Buy Tickets</h1>
-            <h4 className='text-zinc-400 text-xl my-4'>Velit consequatur consequatur inventore iste fugit unde omnis eum aut.</h4>
+        <section className=' bg-[#FFFBFB] flex flex-col items-center pt-10'>
+            <h1 className='text-center font-semibold text-2xl sm:text-4xl uppercase'>Buy Tickets</h1>
+            <h4 className='text-zinc-400 text-md w-[70%] text-center sm:text-xl my-4 '>Velit consequatur consequatur inventore iste fugit unde omnis eum aut.</h4>
             <div className='w-20 h-1.5 bg-[#FF5880]'></div>
 
-            <div className='w-[70%] my-16 flex justify-between '>
+            <div className='w-[70%] my-12 flex  flex-col gap-10 sm:flex-row justify-between '>
 
-                <div className='w-[30%]   rounded-lg border shadow-lg hover:shadow-2xl hover:scale-105 transition-transform transform duration-500'>
+                <div className='w-full sm:w-[30%]  rounded-lg border shadow-lg hover:shadow-2xl hover:scale-105 transition-transform transform duration-500'>
                     <div className='flex flex-col items-center'>
                         <h2 className='text-zinc-500 font-semibold mt-4 mb-3 '>STANDARD ACCESS</h2>
                         <h2 className='text-4xl italic text-center'>$120</h2>
@@ -30,7 +30,7 @@ const BuyTickets = () => {
                     </div>
                 </div>
 
-                <div className='w-[30%]   rounded-lg border shadow-lg hover:shadow-2xl hover:scale-105 transition-transform transform duration-500'>
+                <div className='w-full sm:w-[30%]   rounded-lg border shadow-lg hover:shadow-2xl hover:scale-105 transition-transform transform duration-500'>
                     <div className='flex flex-col items-center'>
                         <h2 className='text-zinc-500 font-semibold mt-4 mb-3'>PRO ACCESS</h2>
                         <h2 className='text-4xl italic text-center'>$250</h2>
@@ -52,7 +52,7 @@ const BuyTickets = () => {
                     </div>
                 </div>
 
-                <div className='w-[30%]   rounded-lg border shadow-lg hover:shadow-2xl hover:scale-105 transition-transform transform duration-500'>
+                <div className='w-full sm:w-[30%]   rounded-lg border shadow-lg hover:shadow-2xl hover:scale-105 transition-transform transform duration-500'>
                     <div className='flex flex-col items-center'>
                         <h2 className='text-zinc-500 font-semibold mt-4 mb-3'>PREMIUM ACCESS</h2>
                         <h2 className='text-4xl italic text-center'>$350</h2>

@@ -82,7 +82,7 @@ export default function SignUp() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="add-User">
+    <form onSubmit={handleSubmit} className="add-User my-12">
       <TextField
         className="input"
         id="filled-basic"
@@ -160,7 +160,7 @@ export default function SignUp() {
       />
 
       <Button
-        style={{ width: "80%" }}
+        style={{ width: "80%", backgroundColor: "#FF5880", padding: "12px 0px",  marginTop:'4px' , fontSize:"16px"  }}
         className="add"
         type="submit"
         variant="contained"

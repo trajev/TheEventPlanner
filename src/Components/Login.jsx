@@ -51,8 +51,8 @@ export default function Login() {
   };
   const token = sessionStorage.getItem("token");
   return (
-    <form onSubmit={handleSubmit} className="add-User">
-      {!token ? <h2>Login First To Get Access</h2> : ""}
+    <form onSubmit={handleSubmit} className="add-User my-12">
+      {!token ? <h2 className="text-xl font-semibold mb-2">Login First To Get Access</h2> : ""}
 
       <TextField
         className="input"
@@ -83,14 +83,14 @@ export default function Login() {
       />
 
       <Button
-        style={{ width: "80%" }}
+        style={{ width: "80%", backgroundColor: "#FF5880", padding: "12px 0px",  marginTop:'4px' , fontSize:"16px" }}
         className="add"
         variant="contained"
         type="submit"
       >
         Login
       </Button>
-      <Button onClick={() => navigate("/signup")}>Create an account</Button>
+      <button className="text-blue-500 uppercase hover:underline border-blue-500" onClick={() => navigate("/signup")}> Create an account </button>
     </form>
   );
 }
