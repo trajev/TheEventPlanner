@@ -5,21 +5,23 @@ import { FaFacebookF } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa6";
 import { FaGoogle } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Footer() {
-  
+
   const data = [
     { name: "Home" },
-    { name: "About us" },
-    { name: "Service" },
-    { name: "Terms of service" },
-    { name: "Privacy policy" },
+    { name: "Services" },
+    { name: "Occasion Hubs" },
+    { name: "Contact Us" },
+    { name: "Register" },
   ];
 
   return (
-    <div className="w-full h-70 bg-[#333333] sm:px-14 px-2 py-6 text-white flex flex-col sm:flex-row sm:items-start sm:justify-between">
+    <div className="w-full mt-10 h-70 bg-[#333333] sm:px-14 px-2 py-6 text-white flex flex-col sm:flex-row sm:items-start sm:justify-between">
       <div className="w-full sm:w-[30%] h-full p-4 overflow-hidden">
-        <h1 className="text-3xl sm:text-4xl mb-6">TheEvent</h1>
+        {/* <h1 className="text-3xl sm:text-4xl mb-6">TheEvent</h1> */}
+        <img src="src\assets\mainlogowhite-removebg.png" alt="logo" className=" scale-150 mb-4 " />
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus a,
           consectetur voluptas sint itaque quidem fugiat molestiae, repellat,
@@ -33,7 +35,7 @@ function Footer() {
         <div className="w-full h-[2px] bg-[#FF5880] my-2"></div>
         {data.map((d, i) => (
           <div className="flex gap-2 items-center py-1.5 sm:py-2 ">
-            <IoIosArrowForward /> <p className="cursor-pointer">{d.name}</p>
+            <IoIosArrowForward /> <Link to={(d.name === "services") ? "/" + d.name : ((d.name === "Contact Us") ? "/contactus" : ((d.name === "Register") ? "/signup" : ((d.name === "Occasion Hubs") ? "/occasionhubs" : "/")))} className="cursor-pointer text-white hover:no-underline">{d.name}</Link>
             <hr className="my-2" />
           </div>
         ))}
@@ -55,7 +57,7 @@ function Footer() {
             <p>info@email.com</p>
           </h3>
         </div>
-        
+
         <div className="flex gap-2 my-4">
           <div className="bg-white text-black rounded-full text-2xl sm:text-xl p-1 cursor-pointer"> <FaXTwitter /> </div>
           <div className="bg-white text-black rounded-full text-2xl sm:text-xl p-1 cursor-pointer"> <FaFacebookF /> </div>
@@ -64,9 +66,9 @@ function Footer() {
           <div className="bg-white text-black rounded-full text-2xl sm:text-xl p-1 cursor-pointer"> <FaLinkedin /> </div>
 
         </div>
-      
+
       </div>
-    </div>
+    </div >
   );
 }
 

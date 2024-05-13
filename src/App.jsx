@@ -11,6 +11,7 @@ import SignUp from "./Components/SignUp";
 import ProfilePage from "./Components/ProfilePage";
 import Footer from "./Components/Footer";
 import WebNavbar from "./Components/WebNavbar";
+import BookingForm from "./Components/BookingForm";
 
 function App() {
   const navigate = useNavigate();
@@ -23,11 +24,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/buytickets" element={<BuyTickets />} />
+        <Route path="/occasionhubs" element={<BuyTickets />} />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/profile" element={<ProfilePage />} />
+        
+        <Route path="/booking" element={<BookingForm />} />
       </Routes>
 
       <Footer />

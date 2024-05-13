@@ -1,5 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useUserContext } from "../Contexts/UserContext";
+
 
 
 import Container from "react-bootstrap/Container";
@@ -9,8 +10,44 @@ import Navbar from "react-bootstrap/Navbar";
 import TheaterComedyIcon from '@mui/icons-material/TheaterComedy';
 import Dropdown from "react-bootstrap/Dropdown";
 
+import {useState} from 'react';
+
+
 const WebNavbar = () => {
+
+    const [clicked1, setClicked1] = useState(false);
+    const handleMouseDown1 = () => {
+        setClicked1(true);
+    };
+    const handleMouseUp1 = () => {
+        setClicked1(false);
+    };
+    const [clicked2, setClicked2] = useState(false);
+    const handleMouseDown2 = () => {
+        setClicked2(true);
+    };
+    const handleMouseUp2 = () => {
+        setClicked2(false);
+    };
+
+    const [clicked3, setClicked3] = useState(false);
+    const handleMouseDown3 = () => {
+        setClicked3(true);
+    };
+    const handleMouseUp3 = () => {
+        setClicked3(false);
+    };
+    
+    const [clicked4, setClicked4] = useState(false);
+    const handleMouseDown4 = () => {
+        setClicked4(true);
+    };
+    const handleMouseUp4 = () => {
+        setClicked4(false);
+    };
+
     const { userToken, logout } = useUserContext();
+    
     const navigate = useNavigate();
     return (
         <div className="bg-[#FFFBFB]">
@@ -26,10 +63,11 @@ const WebNavbar = () => {
                 <a href="/contactus" className='text-lg leading-4 p-2 '>Contact Us</a>
             </nav> */}
 
-            <Navbar expand="lg" className="bg-body-primary navbarmain bg-[#FFFBFB]">
+            <Navbar expand="lg" className="bg-body primary p-0 bg-[#FFFBFB] mx-10">
                 <Container fluid>
                     <Navbar.Brand onClick={() => navigate("/")}>
-                        TheEvent <TheaterComedyIcon />
+                        {/* TheEvent <TheaterComedyIcon /> */}
+                        <Nav.Link onClick={() => { navigate("/") }} > <img src="src/assets/mainlogo-bgremoved.png" alt="logo" className="h-16 object-cover scale-100 sm:scale-150 cursor-pointer " /> </Nav.Link>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll" className="navmain">
@@ -38,43 +76,58 @@ const WebNavbar = () => {
                             style={{ maxHeight: "200px" }}
                             navbarScroll
                         >
-                            <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
-                            <Nav.Link onClick={() => navigate("/services")}>Services</Nav.Link>
-                            <Nav.Link onClick={() => navigate("/buytickets")}>Packages</Nav.Link>
-                            <Nav.Link onClick={() => navigate("/contactus")}>ContactUs</Nav.Link>
+                            <Nav.Link className="font-semibold  hover:text-[#FF5880] " onClick={() => navigate("/")}>Home</Nav.Link>
+                            <Nav.Link className="font-semibold  hover:text-[#FF5880] " onClick={() => navigate("/services")}>Services</Nav.Link>
+                            <Nav.Link className="font-semibold  hover:text-[#FF5880] capitalize" onClick={() => navigate("/occasionhubs")}>Occasion Hubs</Nav.Link>
+                            <Nav.Link className="font-semibold  hover:text-[#FF5880] " onClick={() => navigate("/contactus")}>ContactUs</Nav.Link>
                         </Nav>
 
                         <Dropdown>
                             <Dropdown.Toggle
-                            // style={{backgroundColor:"#FF5880" , border:"none", focus:{border:}}}
+                                // style={{backgroundColor:"#FF5880" , border:"none", focus:{border:}}}
                                 variant="secondary"
                                 id="dropdown-basic"
-                                className="username bg-[#FF5880] border-none  focus:border-none"
+                                className="username bg-[#FF5880] border-none "
                             >
-                                User
+                                User &nbsp;
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
                                 {userToken ? (
                                     <>
-                                        <Dropdown.Item onClick={() => navigate("/profile")}>
+                                        <Dropdown.Item
+                                        onMouseDown={handleMouseDown3}
+                                        onMouseUp={handleMouseUp3}
+                                        onClick={() => navigate("/profile")}
+                                        style={{ backgroundColor: clicked3 ? "#FF5880" : "white", color: clicked3? "white":"black", fontSize: "16px" }} 
+                                        >
                                             Profile
                                         </Dropdown.Item>
                                         <Dropdown.Item
-                                            onClick={() => {
-                                                logout();
-                                                navigate("/login");
-                                            }}
+                                            onMouseDown={handleMouseDown4}
+                                            onMouseUp={handleMouseUp4}
+                                            onClick={() => navigate("/login")}
+                                            style={{ backgroundColor: clicked4 ? "#FF5880" : "white", color: clicked4? "white":"black", fontSize: "16px" }} 
                                         >
                                             Logout
                                         </Dropdown.Item>
                                     </>
                                 ) : (
                                     <>
-                                        <Dropdown.Item style={{ color:"white", backgroundColor: "#FF5880" , fontSize:"16px"}} onClick={() => navigate("/login")}>
+                                        <Dropdown.Item
+                                            onMouseDown={handleMouseDown1}
+                                            onMouseUp={handleMouseUp1}
+                                            onClick={() => navigate("/login")}
+                                            style={{ backgroundColor: clicked1 ? "#FF5880" : "white", color: clicked1? "white":"black", fontSize: "16px" }}
+                                        >
                                             Login
                                         </Dropdown.Item>
-                                        <Dropdown.Item style={{ color:"white", backgroundColor: "#FF5880" , fontSize:"16px"}}  onClick={() => navigate("/signup")}>
+                                        <Dropdown.Item
+                                            onMouseDown={handleMouseDown2}
+                                            onMouseUp={handleMouseUp2}
+                                            onClick={() => navigate("/signup")}
+                                            style={{ backgroundColor: clicked2 ? "#FF5880" : "white", color: clicked2? "white": "black", fontSize: "16px" }}
+                                        >
                                             Register
                                         </Dropdown.Item>
                                     </>
@@ -83,7 +136,7 @@ const WebNavbar = () => {
                         </Dropdown>
                     </Navbar.Collapse>
                 </Container>
-            </Navbar>   
+            </Navbar>
 
         </div>
     )

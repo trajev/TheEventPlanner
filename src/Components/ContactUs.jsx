@@ -13,7 +13,10 @@ const ContactUs = () => {
 
     function handleForm(data) {
         console.log(data)
+
         //post data to backend api
+        
+
         reset();
     }
 
@@ -23,7 +26,7 @@ const ContactUs = () => {
             <h4 className='text-zinc-400 text-md w-[70%] text-center sm:text-xl my-4'>Nihil officia ut sint molestiae tenetur.</h4>
             <div className='w-16 h-1.5 bg-[#FF5880]'></div>
 
-            <div className='w-screen flex  flex-col items-center gap-10 py-10 pt-4 sm:pt-12'>
+            <div className='w-screen flex  flex-col items-center gap-10 pt-4 sm:pt-12'>
 
                 <div className='w-full sm:w-[72%] flex flex-col items-center sm:flex-row'>
                     <div className='w-1/2 text-center sm:w-1/3 border-b-2 sm:border-r-2 sm:border-b-0 border-zinc-300 flex flex-col py-8 gap-3 items-center justify-center '>
