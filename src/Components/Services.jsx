@@ -1,7 +1,7 @@
 
 const Services = () => {
   return (
-    <section className='bg-[#FFFBFB]'>
+    <section className='bg-[#FFFBFB] py-4'>
         <h1 className='py-10 text-center text-2xl sm:text-4xl'>Our Services</h1>
         <div className=' px-2 sm:px-10 pb-10 sm:pb-0 flex flex-wrap justify-around '>
 

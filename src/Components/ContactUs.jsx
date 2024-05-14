@@ -1,6 +1,7 @@
-// import { useState } from "react"
+import React from 'react';
 import { useForm } from 'react-hook-form';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ContactUs = () => {
 
@@ -12,26 +13,43 @@ const ContactUs = () => {
     } = useForm();
 
     function handleForm(data) {
-        console.log(data)
-
-        //post data to backend api
-        
-
-        reset();
+        // Simulate a call to the backend API
+        // You should replace this with an actual API call
+        fetch('https://formspree.io/f/mqkrjdnv', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json() )
+        .then(data => {
+            console.log( data );
+            if (data.ok) {
+                toast.success('Thank you for contacting us. We will call you soon!');
+                reset();
+            } else {
+                toast.error('Something went wrong. Please try again.');
+            }
+        })
+        .catch((error) => {
+            toast.error('Something went wrong. Please try again.');
+        });
     }
 
     return (
         <section className="flex flex-col items-center py-8 sm:py-10 bg-[#FFFBFB]">
+            <ToastContainer />
             <h1 className='text-center font-semibold text-2xl sm:text-4xl uppercase'>Contact Us</h1>
-            <h4 className='text-zinc-400 text-md w-[70%] text-center sm:text-xl my-4'>Nihil officia ut sint molestiae tenetur.</h4>
+            <h4 className='text-zinc-400 text-md w-[70%] text-center sm:text-xl my-4 capitalize'>Feel Free to contact us. Get your doubts clarified.</h4>
             <div className='w-16 h-1.5 bg-[#FF5880]'></div>
 
-            <div className='w-screen flex  flex-col items-center gap-10 pt-4 sm:pt-12'>
+            <div className='w-screen flex flex-col items-center gap-10 pt-4 sm:pt-12'>
 
                 <div className='w-full sm:w-[72%] flex flex-col items-center sm:flex-row'>
                     <div className='w-1/2 text-center sm:w-1/3 border-b-2 sm:border-r-2 sm:border-b-0 border-zinc-300 flex flex-col py-8 gap-3 items-center justify-center '>
                         <h1 className='uppercase font-bold text-lg'>Address</h1>
-                        <h4 className='text-md'>A108 Adam Street, NY 535022, USA</h4>
+                        <h4 className='text-md'> 404 Adam Street, Lucknow, UP 2260020, India </h4>
                     </div>
                     <div className='w-1/2 text-center sm:w-1/3 flex flex-col py-8 gap-3 items-center justify-center'>
                         <h1 className='uppercase font-bold text-lg'>phone number</h1>
@@ -43,7 +61,7 @@ const ContactUs = () => {
                     </div>
                 </div>
 
-                <form action='post' className='w-[72%] text-center' onSubmit={handleSubmit(handleForm)} >
+                <form className='w-[72%] text-center' onSubmit={handleSubmit(handleForm)} >
 
                     <div className='flex flex-col gap-4'>
                         <div className='flex flex-col sm:flex-row gap-3 sm:gap-0 justify-between'>
@@ -56,12 +74,9 @@ const ContactUs = () => {
 
                     <input type="submit" className='bg-[#FF5880] rounded-full px-10 py-2 mt-4 text-white text-lg hover:bg-[#ec4d72] font-semibold cursor-pointer' value="Send Message" />
                 </form>
-
-
             </div>
-
         </section>
     )
 }
 
-export default ContactUs
+export default ContactUs;

@@ -3,8 +3,9 @@ import Hero from './Hero';
 import Services from './Services';
 import WhyChooseUs from './WhyChooseUs';
 import Gallery from './Gallery';
-import BuyTickets from './BuyTickets';
 import ContactUs from './ContactUs';
+import Halls from './Halls';
+import Ourprices from './Ourprices';
 
 const Home = () => {
   return (
@@ -16,9 +17,11 @@ const Home = () => {
 
     <WhyChooseUs />
 
-    <Gallery />
+    <Halls />
 
-    {/* <BuyTickets/> */}
+    <Ourprices />
+
+    <Gallery />
 
     <ContactUs />
     

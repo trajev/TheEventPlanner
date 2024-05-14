@@ -22,7 +22,7 @@ function Gallery() {
     "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmiro.medium.com%2Fv2%2Fresize%3Afit%3A800%2F1*RbhDxmKO4GRcdqdsYfJnxg.jpeg&f=1&nofb=1&ipt=4a79c5fc76431f874967913a4f7e3b9bd1b520befff8b8f62a056d56e7b37e05&ipo=images"
   ];
   return (
-    <div className="w-full pb-16 bg-[#FFFBFB] ">
+    <div className="w-full pb-16 py-12 bg-[#FFFBFB] ">
       <h1 className="text-center text-2xl sm:text-4xl">Past Events</h1>
       <div className="mx-10 mt-12">
         <Slider {...settings}>
