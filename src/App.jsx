@@ -39,7 +39,8 @@ function App() {
         <Route path="/halls" element={<Halls />} />
         <Route path="/browsehalls" element={<Browsehalls />} />
         <Route path="/ourprices" element={<Ourprices />} />
-        <Route path="/booking" element={<BookingForm />} />
+        <Route path="/booking/:name" element={<BookingForm />} />
+
       </Routes>
 
       <Footer />

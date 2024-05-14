@@ -1,11 +1,58 @@
 import React, { useState } from 'react'
+import { useParams } from 'react-router-dom';
+import data from '../utils/data';
 
 const BookingForm = () => {
+
+  const { name } = useParams(); 
+
+  const filterdata = data.filter( item => item.name===name );
+  
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    address: '',
+    email: '',
+    contactNo: '',
+    eventCategory: '',
+    eventDate: '',
+    startTime: '',
+    endTime: '',
+    services: {
+      decoration: false,
+      foodCatering: false,
+      entertainment: false,
+      photography: false,
+      invitations: false,
+      transportation: false,
+    },
+  });
+
   const [showBill, setShowBill] = useState(false);
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleServiceChange = (e) => {
+    const { name, checked } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      services: {
+        ...prevFormData.services,
+        [name]: checked,
+      },
+    }));
+  };
+  
   const handleGenerateBill = () => {
-    (showBill) ? setShowBill(false) : setShowBill(true);
-  }
+    setShowBill(!showBill);
+    console.log("Form Data Filled:", formData);
+  };
 
   const today = new Date(Date.now());
   const formattedDate = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
@@ -44,31 +91,31 @@ const BookingForm = () => {
 
             <div>
               <label htmlFor="firstname" className='text-md sm:text-lg'>First Name :</label>
-              <input type="text" id="firstname" placeholder='' className='border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[69%] sm:w-[23vw] text-sm sm:text-md' />
+              <input type="text" name="firstName" id="firstname" placeholder='' className='border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[69%] sm:w-[23vw] text-sm sm:text-md' onChange={handleInputChange} />
             </div>
 
             <div>
               <label htmlFor="lastname" className='text-md sm:text-lg'>Last Name : </label>
-              <input type="text" id='lastname' placeholder='' className='border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[69%] sm:w-[23vw]  text-sm sm:text-md' />
+              <input type="text" name="lastName" id='lastname' placeholder='' className='border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[69%] sm:w-[23vw]  text-sm sm:text-md' onChange={handleInputChange} />
             </div>
 
           </div>
 
           <div>
             <label htmlFor="address" className='text-md sm:text-lg mb-2'>Resident Address :</label>
-            <input type="text" id='address' placeholder='' className='border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[55%] sm:w-[82.6%]  text-sm sm:text-md' />
+            <input type="text" name="address" id='address' placeholder='' className='border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[55%] sm:w-[82.6%]  text-sm sm:text-md' onChange={handleInputChange} />
           </div>
 
           <div className=' flex flex-col sm:flex-row justify-between my-2'>
 
             <div>
               <label htmlFor="emailid" className=' text-md sm:text-lg'>Email Address : </label>
-              <input type="text" id="emailid" placeholder='' className='border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[61%] sm:w-[21vw]  text-sm sm:text-md' />
+              <input type="text" name="email" id="emailid" placeholder='' className='border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[61%] sm:w-[21vw]  text-sm sm:text-md' onChange={handleInputChange} />
             </div>
 
             <div>
               <label htmlFor="contactno" className='text-md sm:text-lg'>Contact Number : </label>
-              <input type="text" id='contactno' placeholder='' className=' border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[55.5%] sm:w-[20vw]  text-sm sm:text-md' />
+              <input type="text" name="contactNo" id='contactno' placeholder='' className=' border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[55.5%] sm:w-[20vw]  text-sm sm:text-md' onChange={handleInputChange} />
             </div>
 
           </div>
@@ -77,19 +124,19 @@ const BookingForm = () => {
             <div className='w-full sm:w-[50.5%] flex'>
               <span className='font-semibold text-md sm:text-xl w-[30%]'>Hall Address: </span>
               <div className=''>
-                <span className='text-md sm:text-lg '>123 Main Street, Anytown, USA</span>
+                <span className='text-md sm:text-lg '>  {filterdata[0].location} </span>
               </div>
             </div>
             <div>
               <span className='font-semibold text-md sm:text-xl'>Hall Capacity: </span>
-              <span className='text-md sm:text-lg'>1200 Members</span>
+              <span className='text-md sm:text-lg'>{filterdata[0].capacity} Members</span>
             </div>
           </div>
 
 
           <div class="custom-select" className="">
             <span className='font-semibold text-md sm:text-xl'>Event Category: </span>
-            <select className='w-[55%] sm:w-[30%] px-2 sm:px-4 rounded-sm py-2 mx-2 sm:mx-6 text-black border-1 border-black focus:outline-none shadow-sm cursor-pointer text-sm sm:text-md'>
+            <select className='w-[55%] sm:w-[30%] px-2 sm:px-4 rounded-sm py-2 mx-2 sm:mx-6 text-black border-1 border-black focus:outline-none shadow-sm cursor-pointer text-sm sm:text-md' onChange={handleInputChange}>
               <option value="0" > Select Category</option>
               <option value="1" > Birthday</option>
               <option value="2" > Marriage</option>
@@ -104,17 +151,17 @@ const BookingForm = () => {
 
             <div>
               <label htmlFor="eventdate" className=' text-md sm:text-lg font-semibold'>Event Date : </label>
-              <input type="text" id="eventdate" placeholder='' autoComplete='off' className='border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[50vw] sm:w-[10vw]  text-sm sm:text-md' />
+              <input type="text" id="eventdate" name="eventDate" placeholder='' autoComplete='off' className='border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[50vw] sm:w-[10vw]  text-sm sm:text-md' onChange={handleInputChange} />
             </div>
 
             <div>
               <label htmlFor="starttime" className='text-md sm:text-lg font-semibold'> Start Time : </label>
-              <input type="text" id='starttime' placeholder='' className=' border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[51vw] sm:w-[10vw]  text-sm sm:text-md' />
+              <input type="text" id='starttime' name="startTime" placeholder='' className=' border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[51vw] sm:w-[10vw]  text-sm sm:text-md'onChange={handleInputChange}  />
             </div>
 
             <div>
               <label htmlFor="endtime" className='text-md sm:text-lg font-semibold'> End Time : </label>
-              <input type="text" id='endtime' placeholder='' className=' border-b border-black pl-2 bg-transparent mx-2 focus:outline-none sm:w-[10vw] w-[53vw] text-sm sm:text-md' />
+              <input type="text" id='endtime' name="endTime" placeholder='' className=' border-b border-black pl-2 bg-transparent mx-2 focus:outline-none sm:w-[10vw] w-[53vw] text-sm sm:text-md'onChange={handleInputChange}  />
             </div>
 
           </div>
@@ -135,42 +182,42 @@ const BookingForm = () => {
                   <td className='py-3 text-sm sm:text-lg px-4 '> Decoration Services </td>
                   <td className='py-3 text-sm sm:text-lg text-center'> {formatPrice(10000)}</td>
                   <td className='py-3 text-sm sm:text-lg text-center'>
-                    <input type="checkbox" name="facility" className=' border border-green-400 p-2 sm:h-4 sm:w-4 outline-none' />
+                    <input type="checkbox" name="decoration" className=' border border-green-400 p-2 sm:h-4 sm:w-4 outline-none' onChange={handleInputChange}/>
                   </td>
                 </tr>
                 <tr className='my-4'>
                   <td className='py-3 text-sm sm:text-lg px-4 '> Food Catering </td>
                   <td className='py-3 text-sm sm:text-lg text-center'>{formatPrice(25000)}</td>
                   <td className='py-3 text-sm sm:text-lg text-center'>
-                    <input type="checkbox" name="facility" className='border-none p-2 sm:h-4 sm:w-4' />
+                    <input type="checkbox" name="foodCatering" className='border-none p-2 sm:h-4 sm:w-4' onChange={handleInputChange} />
                   </td>
                 </tr>
                 <tr className='my-4'>
                   <td className='py-3 text-sm sm:text-lg px-4'> Entertainment </td>
                   <td className='py-3 text-sm sm:text-lg text-center'>{formatPrice(20000)}</td>
                   <td className='py-3 text-sm sm:text-lg text-center'>
-                    <input type="checkbox" name="facility" className='border-none p-2 sm:h-4 sm:w-4 bg-red-300' />
+                    <input type="checkbox" name="entertainment" className='border-none p-2 sm:h-4 sm:w-4 bg-red-300' onChange={handleInputChange} />
                   </td>
                 </tr>
                 <tr className='my-4'>
                   <td className='py-3 text-sm sm:text-lg px-4'> Photography/Videography </td>
                   <td className='py-3 text-sm sm:text-lg text-center'>{formatPrice(30000)}</td>
                   <td className='py-3 text-sm sm:text-lg text-center'>
-                    <input type="checkbox" name="facility" className='border-none p-2 sm:h-4 sm:w-4' />
+                    <input type="checkbox" name="photography" className='border-none p-2 sm:h-4 sm:w-4' onChange={handleInputChange} />
                   </td>
                 </tr>
                 <tr className='my-4'>
                   <td className='py-3 text-sm sm:text-lg px-4'> Invitations & Stationery </td>
                   <td className='py-3 text-sm sm:text-lg text-center'>{formatPrice(8000)}</td>
                   <td className='py-3 text-sm sm:text-lg text-center'>
-                    <input type="checkbox" name="facility" className='border-none p-2 sm:h-4 sm:w-4' />
+                    <input type="checkbox" name="invitations" className='border-none p-2 sm:h-4 sm:w-4' onChange={handleInputChange} />
                   </td>
                 </tr>
                 <tr className='my-4' >
                   <td className='py-3 text-sm sm:text-lg px-4' > Transportation </td>
                   <td className='py-3 text-sm sm:text-lg text-center'>{formatPrice(15000)}</td>
                   <td className='py-3 text-sm sm:text-lg text-center'>
-                    <input type="checkbox" id='trans' name="facility" className='border-none p-2 sm:h-4 sm:w-4' />
+                    <input type="checkbox" id='trans' name="transportation" className='border-none p-2 sm:h-4 sm:w-4' onChange={handleInputChange} />
                   </td>
                 </tr>
 

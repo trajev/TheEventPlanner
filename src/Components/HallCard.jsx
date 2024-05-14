@@ -1,15 +1,15 @@
 import React from 'react'
-import { CiLocationOn } from "react-icons/ci";
-import { BiHomeAlt2 } from "react-icons/bi";
-import { IoStar } from "react-icons/io5";
-
+import { useNavigate } from 'react-router-dom';
 
 const HallCard = ({ imageUrl, name, location, type, rating, numberOfRooms, capacity }) => {
 
-    const defaultImageUrl = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fpreviews%2F000%2F634%2F606%2Foriginal%2Fhotel-icon-symbol-sign-vector.jpg&f=1&nofb=1&ipt=b68327faf50a074d1b1d638812557af82557b02a7e7ce70357a097761666f26a&ipo=images";
+    const navigate = useNavigate();
+    const handleClick = ( name ) => {
+        navigate(`/booking/${name}`)
+    }
 
     return (
-        <div className='w-[31%] p-2 border border-black hover:bg-white cursor-pointer rounded-md hover:shadow-lg transition duration-300 ease-in-out transform  flex flex-col items-center '>
+        <div onClick={ ()=>handleClick(name) }  className='w-[31%] p-2 border border-black hover:bg-white cursor-pointer rounded-md hover:shadow-lg transition duration-300 ease-in-out transform  flex flex-col items-center '>
             <img src={imageUrl} alt="hotel-image" className='w-full h-[13vw] rounded-md object-cover object-center' />
             <div className='px-2 py-2 flex flex-col w-[99%]'>
                 <div className='flex justify-between my-2'>
