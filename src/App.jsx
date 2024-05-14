@@ -15,18 +15,11 @@ import BookingForm from "./Components/BookingForm";
 import Halls from "./Components/Halls";
 import Browsehalls from "./Components/Browsehalls";
 
+
 function App() {
   const navigate = useNavigate();
   const { userToken, logout } = useUserContext();
 
-  // useEffect(() => {
-  // AOS.init({
-  //   once:true,
-  //   disable: "phone",
-  //   duration: 700,
-  //   easing: "ease-out-cubic",
-  // });
-  // }, []);
 
   return (
     <div className="overflow-hidden">

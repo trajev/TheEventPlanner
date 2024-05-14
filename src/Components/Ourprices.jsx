@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 const Ourprices = () => {
     return (
-        <section className=' bg-[#FFFBFB] flex flex-col items-center pt-10'>
+        <section className=' bg-[#FFFBFB] flex flex-col items-center pt-10' >
             <h1 className='text-center font-semibold text-2xl sm:text-4xl uppercase'>Our Prices</h1>
             <h4 className='text-zinc-400 text-md w-[70%] text-center sm:text-xl my-4 '>Affordable rates for unforgettable events—your dream celebration made real.</h4>
             <div className='w-20 h-1.5 bg-[#FF5880]'></div>
