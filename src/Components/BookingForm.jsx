@@ -4,55 +4,91 @@ import data from '../utils/data';
 
 const BookingForm = () => {
 
-  const { name } = useParams(); 
+  const { name } = useParams();
 
-  const filterdata = data.filter( item => item.name===name );
-  
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    address: '',
-    email: '',
-    contactNo: '',
-    eventCategory: '',
-    eventDate: '',
-    startTime: '',
-    endTime: '',
-    services: {
-      decoration: false,
-      foodCatering: false,
-      entertainment: false,
-      photography: false,
-      invitations: false,
-      transportation: false,
-    },
+  const filterdata = data.filter(item => item.name === name);
+
+
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [address, setAddress] = useState('');
+  const [email, setEmail] = useState('');
+  const [contactNo, setContactNo] = useState('');
+  const [eventCategory, setEventCategory] = useState('');
+  const [eventDate, setEventDate] = useState('');
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
+
+  const [services, setServices] = useState({
+    decoration: false,
+    foodCatering: false,
+    entertainment: false,
+    photography: false,
+    invitations: false,
+    transportation: false,
   });
 
   const [showBill, setShowBill] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    switch (name) {
+      case 'firstName':
+        setFirstName(value);
+        break;
+      case 'lastName':
+        setLastName(value);
+        break;
+      case 'address':
+        setAddress(value);
+        break;
+      case 'email':
+        setEmail(value);
+        break;
+      case 'contactNo':
+        setContactNo(value);
+        break;
+      case 'eventCategory':
+        setEventCategory(value);
+        break;
+      case 'eventDate':
+        setEventDate(value);
+        break;
+      case 'startTime':
+        setStartTime(value);
+        break;
+      case 'endTime':
+        setEndTime(value);
+        break;
+      default:
+        break;
+    }
   };
 
   const handleServiceChange = (e) => {
     const { name, checked } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      services: {
-        ...prevFormData.services,
-        [name]: checked,
-      },
+    setServices((prevServices) => ({
+      ...prevServices,
+      [name]: checked,
     }));
   };
-  
+
   const handleGenerateBill = () => {
     setShowBill(!showBill);
-    console.log("Form Data Filled:", formData);
+    console.log("Form Data Filled:", {
+      firstName,
+      lastName,
+      address,
+      email,
+      contactNo,
+      eventCategory,
+      eventDate,
+      startTime,
+      endTime,
+      services,
+    });
   };
+
 
   const today = new Date(Date.now());
   const formattedDate = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
@@ -60,6 +96,37 @@ const BookingForm = () => {
   function formatPrice(number) {
     return number.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
+
+
+
+  const hallPrice = 12000; // Default hall price
+
+  const totalPrice = Object.values(services).reduce((total, service) => {
+    if (service) {
+      // Add the price of selected services to the total
+      return total + servicePrice(service);
+    }
+    return total;
+  }, hallPrice);
+
+  const servicePrice = (service) => {
+    switch (service) {
+      case 'decoration':
+        return 10000;
+      case 'foodCatering':
+        return 25000;
+      case 'entertainment':
+        return 20000;
+      case 'photography':
+        return 30000;
+      case 'invitations':
+        return 8000;
+      case 'transportation':
+        return 15000;
+      default:
+        return 0;
+    }
+  };
 
 
   return (
@@ -156,12 +223,12 @@ const BookingForm = () => {
 
             <div>
               <label htmlFor="starttime" className='text-md sm:text-lg font-semibold'> Start Time : </label>
-              <input type="text" id='starttime' name="startTime" placeholder='' className=' border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[51vw] sm:w-[10vw]  text-sm sm:text-md'onChange={handleInputChange}  />
+              <input type="text" id='starttime' name="startTime" placeholder='' className=' border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[51vw] sm:w-[10vw]  text-sm sm:text-md' onChange={handleInputChange} />
             </div>
 
             <div>
               <label htmlFor="endtime" className='text-md sm:text-lg font-semibold'> End Time : </label>
-              <input type="text" id='endtime' name="endTime" placeholder='' className=' border-b border-black pl-2 bg-transparent mx-2 focus:outline-none sm:w-[10vw] w-[53vw] text-sm sm:text-md'onChange={handleInputChange}  />
+              <input type="text" id='endtime' name="endTime" placeholder='' className=' border-b border-black pl-2 bg-transparent mx-2 focus:outline-none sm:w-[10vw] w-[53vw] text-sm sm:text-md' onChange={handleInputChange} />
             </div>
 
           </div>
@@ -182,42 +249,42 @@ const BookingForm = () => {
                   <td className='py-3 text-sm sm:text-lg px-4 '> Decoration Services </td>
                   <td className='py-3 text-sm sm:text-lg text-center'> {formatPrice(10000)}</td>
                   <td className='py-3 text-sm sm:text-lg text-center'>
-                    <input type="checkbox" name="decoration" className=' border border-green-400 p-2 sm:h-4 sm:w-4 outline-none' onChange={handleInputChange}/>
+                    <input type="checkbox" name="decoration" className=' border border-green-400 p-2 sm:h-4 sm:w-4 outline-none' onChange={handleServiceChange} />
                   </td>
                 </tr>
                 <tr className='my-4'>
                   <td className='py-3 text-sm sm:text-lg px-4 '> Food Catering </td>
                   <td className='py-3 text-sm sm:text-lg text-center'>{formatPrice(25000)}</td>
                   <td className='py-3 text-sm sm:text-lg text-center'>
-                    <input type="checkbox" name="foodCatering" className='border-none p-2 sm:h-4 sm:w-4' onChange={handleInputChange} />
+                    <input type="checkbox" name="foodCatering" className='border-none p-2 sm:h-4 sm:w-4' onChange={handleServiceChange} />
                   </td>
                 </tr>
                 <tr className='my-4'>
                   <td className='py-3 text-sm sm:text-lg px-4'> Entertainment </td>
                   <td className='py-3 text-sm sm:text-lg text-center'>{formatPrice(20000)}</td>
                   <td className='py-3 text-sm sm:text-lg text-center'>
-                    <input type="checkbox" name="entertainment" className='border-none p-2 sm:h-4 sm:w-4 bg-red-300' onChange={handleInputChange} />
+                    <input type="checkbox" name="entertainment" className='border-none p-2 sm:h-4 sm:w-4 bg-red-300' onChange={handleServiceChange} />
                   </td>
                 </tr>
                 <tr className='my-4'>
                   <td className='py-3 text-sm sm:text-lg px-4'> Photography/Videography </td>
                   <td className='py-3 text-sm sm:text-lg text-center'>{formatPrice(30000)}</td>
                   <td className='py-3 text-sm sm:text-lg text-center'>
-                    <input type="checkbox" name="photography" className='border-none p-2 sm:h-4 sm:w-4' onChange={handleInputChange} />
+                    <input type="checkbox" name="photography" className='border-none p-2 sm:h-4 sm:w-4' onChange={handleServiceChange} />
                   </td>
                 </tr>
                 <tr className='my-4'>
                   <td className='py-3 text-sm sm:text-lg px-4'> Invitations & Stationery </td>
                   <td className='py-3 text-sm sm:text-lg text-center'>{formatPrice(8000)}</td>
                   <td className='py-3 text-sm sm:text-lg text-center'>
-                    <input type="checkbox" name="invitations" className='border-none p-2 sm:h-4 sm:w-4' onChange={handleInputChange} />
+                    <input type="checkbox" name="invitations" className='border-none p-2 sm:h-4 sm:w-4' onChange={handleServiceChange} />
                   </td>
                 </tr>
                 <tr className='my-4' >
                   <td className='py-3 text-sm sm:text-lg px-4' > Transportation </td>
                   <td className='py-3 text-sm sm:text-lg text-center'>{formatPrice(15000)}</td>
                   <td className='py-3 text-sm sm:text-lg text-center'>
-                    <input type="checkbox" id='trans' name="transportation" className='border-none p-2 sm:h-4 sm:w-4' onChange={handleInputChange} />
+                    <input type="checkbox" id='trans' name="transportation" className='border-none p-2 sm:h-4 sm:w-4' onChange={handleServiceChange} />
                   </td>
                 </tr>
 
@@ -226,7 +293,7 @@ const BookingForm = () => {
           </div>
 
           <div className='text-center'>
-            <input type="submit" onClick={handleGenerateBill} className='bg-[#FF5880] rounded-full px-10 py-2 mt-4 text-white text-lg hover:bg-[#ec4d72] font-semibold cursor-pointer' value="Generate Bill" />
+            <input type="submit" onClick={(e) => handleGenerateBill(e)} className='bg-[#FF5880] rounded-full px-10 py-2 mt-4 text-white text-lg hover:bg-[#ec4d72] font-semibold cursor-pointer' value="Generate Bill" />
           </div>
 
         </div>
@@ -299,18 +366,30 @@ const BookingForm = () => {
                         <td className='w-[50%] sm:w-[80%] text-md sm:text-lg ' > Hall Price</td>
                         <td className='w-[50%] sm:text-left text-right sm:w-[20%]  text-sm sm:text-base' > {formatPrice(12000)} &#x20B9;</td>
                       </tr>
-                      <tr>
+                      {(services.decoration) && <tr>
+                        <td className='w-[50%] sm:w-[80%] text-md sm:text-lg' > Decoration Services </td>
+                        <td className='w-[50%] sm:text-left text-right sm:w-[20%] text-sm sm:text-base' > {formatPrice(10000)} &#x20B9; </td>
+                      </tr>}
+                      {(services.foodCatering) && <tr>
+                        <td className='w-[50%] sm:w-[80%] text-md sm:text-lg' > Food Catering </td>
+                        <td className='w-[50%] sm:text-left text-right sm:w-[20%] text-sm sm:text-base' > {formatPrice(25000)} &#x20B9; </td>
+                      </tr>}
+                      {(services.entertainment) && <tr>
                         <td className='w-[50%] sm:w-[80%] text-md sm:text-lg' > Entertainment </td>
                         <td className='w-[50%] sm:text-left text-right sm:w-[20%] text-sm sm:text-base' > {formatPrice(20000)} &#x20B9; </td>
-                      </tr>
-                      <tr>  
-                        <td className='w-[50%] sm:w-[80%] text-md sm:text-lg' > Decoration Services</td>
-                        <td className='w-[50%] sm:text-left text-right sm:w-[20%] text-sm sm:text-base' > {formatPrice(10000)} &#x20B9; </td>
-                      </tr>
+                      </tr>}
+                      {(services.photography) && <tr>
+                        <td className='w-[50%] sm:w-[80%] text-md sm:text-lg' > Photography/Videography Services</td>
+                        <td className='w-[50%] sm:text-left text-right sm:w-[20%] text-sm sm:text-base' > {formatPrice(8000)} &#x20B9; </td>
+                      </tr>}
+                      {(services.transportation) && <tr>
+                        <td className='w-[50%] sm:w-[80%] text-md sm:text-lg' > Transportation </td>
+                        <td className='w-[50%] sm:text-left text-right sm:w-[20%] text-sm sm:text-base' > {formatPrice(15000)} &#x20B9; </td>
+                      </tr>}
                     </tbody>
                     <tr>
                       <th className='text-right text-pink-500 px-10 py-2 uppercase text-md sm:text-lg'>total </th>
-                      <td className='font-semibold  sm:text-left text-right text-md sm:text-lg'>{formatPrice(32000)} &#x20B9; </td>
+                      <td className='font-semibold  sm:text-left text-right text-md sm:text-lg'>{formatPrice(totalPrice)} &#x20B9; </td>
                     </tr>
                   </table>
                 </div>
