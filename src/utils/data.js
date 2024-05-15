@@ -64,7 +64,7 @@ const data = [
       coordinates: [28.7041, 77.1025]
     },
     {
-      imageUrl: 'http://www.saint-petersburg.com/images/hotels/golden-garden-boutique-hotel/facade-night.jpg',
+      imageUrl: 'https://media-cdn.tripadvisor.com/media/photo-s/1b/f0/d4/6d/golden-garden-espaco.jpg',
       name: 'Golden Gardens',
       location: 'Jaipur',
       type: 'Garden Venue',
