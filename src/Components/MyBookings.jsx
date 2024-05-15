@@ -8,7 +8,7 @@ const MyBookings = () => {
     const [bookings, setbookings] = useState([])
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/order/search/${id}`)
+        axios.get(`https://event-planner-app-backend-y35i.onrender.com/order/search/${id}`)
             .then((res) => setbookings(res.data.Bookings))
     }, [])
 
