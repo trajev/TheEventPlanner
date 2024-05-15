@@ -10,7 +10,7 @@ import Navbar from "react-bootstrap/Navbar";
 import TheaterComedyIcon from '@mui/icons-material/TheaterComedy';
 import Dropdown from "react-bootstrap/Dropdown";
 
-import {useState} from 'react';
+import { useState } from 'react';
 
 
 const WebNavbar = () => {
@@ -37,7 +37,7 @@ const WebNavbar = () => {
     const handleMouseUp3 = () => {
         setClicked3(false);
     };
-    
+
     const [clicked4, setClicked4] = useState(false);
     const handleMouseDown4 = () => {
         setClicked4(true);
@@ -45,7 +45,7 @@ const WebNavbar = () => {
     const handleMouseUp4 = () => {
         setClicked4(false);
     };
-    
+
     const [clicked5, setClicked5] = useState(false);
     const handleMouseDown5 = () => {
         setClicked5(true);
@@ -54,8 +54,8 @@ const WebNavbar = () => {
         setClicked5(false);
     };
 
-    const { userToken, logout } = useUserContext();
-    
+    const { userToken, logout, userId } = useUserContext();
+
     const navigate = useNavigate();
     return (
         <div className="bg-[#FFFBFB]">
@@ -104,26 +104,29 @@ const WebNavbar = () => {
                                 {userToken ? (
                                     <>
                                         <Dropdown.Item
-                                        onMouseDown={handleMouseDown3}
-                                        onMouseUp={handleMouseUp3}
-                                        onClick={() => navigate("/profile")}
-                                        style={{ backgroundColor: clicked3 ? "#FF5880" : "white", color: clicked3? "white":"black", fontSize: "16px" }} 
+                                            onMouseDown={handleMouseDown3}
+                                            onMouseUp={handleMouseUp3}
+                                            onClick={() => navigate("/profile")}
+                                            style={{ backgroundColor: clicked3 ? "#FF5880" : "white", color: clicked3 ? "white" : "black", fontSize: "16px" }}
                                         >
                                             Profile
                                         </Dropdown.Item>
                                         <Dropdown.Item
-                                        onMouseDown={handleMouseDown5}
-                                        onMouseUp={handleMouseUp5}
-                                        onClick={() => navigate("/mybookings")}
-                                        style={{ backgroundColor: clicked5 ? "#FF5880" : "white", color: clicked5? "white":"black", fontSize: "16px" }} 
+                                            onMouseDown={handleMouseDown5}
+                                            onMouseUp={handleMouseUp5}
+                                            onClick={() => navigate(`/mybookings/${userId}`)}
+                                            style={{ backgroundColor: clicked5 ? "#FF5880" : "white", color: clicked5 ? "white" : "black", fontSize: "16px" }}
                                         >
                                             My Bookings
                                         </Dropdown.Item>
                                         <Dropdown.Item
                                             onMouseDown={handleMouseDown4}
                                             onMouseUp={handleMouseUp4}
-                                            onClick={() => navigate("/login")}
-                                            style={{ backgroundColor: clicked4 ? "#FF5880" : "white", color: clicked4? "white":"black", fontSize: "16px" }} 
+                                            onClick={() => {
+                                                logout();
+                                                navigate("/login")
+                                            }}
+                                            style={{ backgroundColor: clicked4 ? "#FF5880" : "white", color: clicked4 ? "white" : "black", fontSize: "16px" }}
                                         >
                                             Logout
                                         </Dropdown.Item>
@@ -134,7 +137,7 @@ const WebNavbar = () => {
                                             onMouseDown={handleMouseDown1}
                                             onMouseUp={handleMouseUp1}
                                             onClick={() => navigate("/login")}
-                                            style={{ backgroundColor: clicked1 ? "#FF5880" : "white", color: clicked1? "white":"black", fontSize: "16px" }}
+                                            style={{ backgroundColor: clicked1 ? "#FF5880" : "white", color: clicked1 ? "white" : "black", fontSize: "16px" }}
                                         >
                                             Login
                                         </Dropdown.Item>
@@ -142,7 +145,7 @@ const WebNavbar = () => {
                                             onMouseDown={handleMouseDown2}
                                             onMouseUp={handleMouseUp2}
                                             onClick={() => navigate("/signup")}
-                                            style={{ backgroundColor: clicked2 ? "#FF5880" : "white", color: clicked2? "white": "black", fontSize: "16px" }}
+                                            style={{ backgroundColor: clicked2 ? "#FF5880" : "white", color: clicked2 ? "white" : "black", fontSize: "16px" }}
                                         >
                                             Register
                                         </Dropdown.Item>

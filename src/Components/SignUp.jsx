@@ -56,6 +56,7 @@ export default function SignUp() {
       },
       validationSchema: userValidationSchema,
       onSubmit: (values) => {
+        alert("Processing please wait...")
         newUser(values);
       },
     });
@@ -76,7 +77,7 @@ export default function SignUp() {
           alert("Registeration Successful");
           navigate("/login");
         } else {
-          alert("server error");
+          alert(res.message);
         }
       });
   };
@@ -160,7 +161,7 @@ export default function SignUp() {
       />
 
       <Button
-        style={{ width: "80%", backgroundColor: "#FF5880", padding: "12px 0px",  marginTop:'4px' , fontSize:"16px"  }}
+        style={{ width: "80%", backgroundColor: "#FF5880", padding: "12px 0px", marginTop: '4px', fontSize: "16px" }}
         className="add"
         type="submit"
         variant="contained"
