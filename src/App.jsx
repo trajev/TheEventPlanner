@@ -15,6 +15,8 @@ import BookingForm from "./Components/BookingForm";
 import Halls from "./Components/Halls";
 import Browsehalls from "./Components/Browsehalls";
 
+import { ToastContainer } from "react-toastify";
+
 
 function App() {
   const navigate = useNavigate();
@@ -41,7 +43,9 @@ function App() {
         <Route path="/ourprices" element={<Ourprices />} />
         <Route path="/booking/:name" element={<BookingForm />} />
 
+
       </Routes>
+      <ToastContainer />
 
       <Footer />
     </div>
