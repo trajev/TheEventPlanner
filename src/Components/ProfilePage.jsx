@@ -64,7 +64,7 @@ const ProfilePage = () => {
             <div className="card-body">
               <div className="profile-pic-container flex justify-center items-center gap-2 mb-2">
                 <img
-                  src={ userData.profilePic || "src/assets/ProfilePic.png" }
+                  src={ userData.profilePic || "https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Image.png" }
                   // src="src/assets/ProfilePic.png"
                   
                   alt="Profile"
