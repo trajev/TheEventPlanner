@@ -25,29 +25,29 @@ function App() {
   return (
     <div className="overflow-hidden bg-[#FFFBFB]">
 
-        <WebNavbar />
+      <WebNavbar />
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/occasionhubs" element={<Halls />} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/occasionhubs" element={<Halls />} />
 
-          <Route path="/contactus" element={<ContactUs />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/profile" element={<ProfilePage />} />
 
-          <Route path="/halls" element={<Halls />} />
-          <Route path="/browsehalls" element={<Browsehalls />} />
-          <Route path="/ourprices" element={<Ourprices />} />
-          <Route path="/booking/:name" element={<BookingForm />} />
-          <Route path="/mybookings" element={<MyBookings />} />
+        <Route path="/halls" element={<Halls />} />
+        <Route path="/browsehalls" element={<Browsehalls />} />
+        <Route path="/ourprices" element={<Ourprices />} />
+        <Route path="/booking/:name" element={<BookingForm />} />
+        <Route path="/mybookings/:id" element={<MyBookings />} />
 
 
-        </Routes>
-        <ToastContainer />
+      </Routes>
+      <ToastContainer />
 
-        <Footer />
+      <Footer />
 
     </div>
   );

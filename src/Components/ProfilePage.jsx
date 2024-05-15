@@ -64,13 +64,13 @@ const ProfilePage = () => {
             <div className="card-body">
               <div className="profile-pic-container flex justify-center items-center gap-2 mb-2">
                 <img
-                  src={ userData.profilePic || "https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Image.png" }
+                  src={userData.profilePic || "https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Image.png"}
                   // src="src/assets/ProfilePic.png"
-                  
+
                   alt="Profile"
                   className="img-fluid profile-pic w-28  "
                 />
-                
+
                 {editMode && (
                   <div className="mb-3">
                     <label htmlFor="profilePic" className="form-label">
@@ -88,43 +88,44 @@ const ProfilePage = () => {
               </div>
               <form>
                 <div className="mb-3">
-                  <label htmlFor="firstName" className="form-label">
-                    First Name
+                  <label htmlFor="fullname" className="form-label">
+                    Username
                   </label>
                   <input
                     type="text"
                     className="form-control"
-                    id="firstName"
-                    name="firstName"
-                    value={userData.firstName}
+                    id="username"
+                    name="username"
+                    value={userData.username}
                     onChange={handleInputChange}
-                    readOnly={!editMode}
+                    readOnly={true}
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="lastName" className="form-label">
-                    Last Name
+                  <label htmlFor="fullname" className="form-label">
+                    Full Name
                   </label>
                   <input
                     type="text"
                     className="form-control"
-                    id="lastName"
-                    name="lastName"
-                    value={userData.lastName}
+                    id="fullname"
+                    name="fullname"
+                    value={userData.fullname}
                     onChange={handleInputChange}
                     readOnly={!editMode}
                   />
                 </div>
+
                 <div className="mb-3">
-                  <label htmlFor="phoneNumber" className="form-label">
+                  <label htmlFor="mobileNo" className="form-label">
                     Phone Number
                   </label>
                   <input
                     type="text"
                     className="form-control"
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    value={userData.phoneNumber}
+                    id="mobileNo"
+                    name="mobileNo"
+                    value={userData.mobileNo}
                     onChange={handleInputChange}
                     readOnly={!editMode}
                   />
@@ -143,20 +144,7 @@ const ProfilePage = () => {
                     readOnly={!editMode}
                   />
                 </div>
-                <div className="mb-3">
-                  <label htmlFor="address" className="form-label">
-                    Address
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="address"
-                    name="address"
-                    value={userData.address}
-                    onChange={handleInputChange}
-                    readOnly={!editMode}
-                  />
-                </div>
+
               </form>
             </div>
             <div className="card-footer">

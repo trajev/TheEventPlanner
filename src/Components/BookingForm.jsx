@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import data from '../utils/data';
 import { useFormik } from 'formik';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useUserContext } from '../Contexts/UserContext';
+import axios from "axios"
 
 const BookingForm = () => {
-
+  const navigate = useNavigate()
   const { name } = useParams();
 
   const { userId } = useUserContext();
@@ -25,6 +26,7 @@ const BookingForm = () => {
     transportation: false,
   });
 
+  const [notes, setnotes] = useState("Hall Booked")
   //formik handling 
   const formik = useFormik({
     initialValues: {
@@ -32,11 +34,9 @@ const BookingForm = () => {
       hallName: filterdata[0].name,
       hallType: filterdata[0].type,
       capacity: filterdata[0].capacity,
-      image:filterdata[0].imageUrl, 
+      image: filterdata[0].imageUrl,
       hallAddress: filterdata[0].location,
-      firstName: "",
-      lastName: "",
-      address: "",
+      fullname: "",
       email: "",
       contactNo: "",
       eventCategory: "",
@@ -53,25 +53,31 @@ const BookingForm = () => {
       }
     },
     onSubmit: (values) => {
-      if (!values.firstName || !values.lastName || !values.address || !values.email || !values.contactNo || !values.eventCategory || !values.eventDate || !values.startTime || !values.endTime) {
+      if (!values.fullname || !values.email || !values.contactNo || !values.eventCategory || !values.eventDate || !values.startTime || !values.endTime) {
         toast.error("Fill the complete form details");
         setShowBill(false);
         return;
       }
-      
-      if( !values.email.includes("@gmail.com") ){
+
+      if (!values.email.includes("@gmail.com")) {
         toast.error("Enter a valid email address");
         return;
       }
-      
-      if( values.contactNo.toString().length!==10 ){
+
+      if (values.contactNo.toString().length !== 10) {
         toast.error("Enter a valid contact number");
         return;
       }
 
+      if (!userId) {
+        alert("Login First to confirm a booking")
+        navigate("/login")
+      }
+
       setShowBill(true);
       formik.values = { ...formik.values }
-      console.log("formik data: ", formik.values );
+      setnotes(formik.values)
+      console.log("formik data: ", formik.values, formik.values.userId);
       toast.success("Bill generated successfully");
     }
   });
@@ -89,8 +95,6 @@ const BookingForm = () => {
     return number.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
-
-
   const hallPrice = 12000; // Default hall price
 
   const totalPrice = Object.values(services).reduce((total, service) => {
@@ -101,7 +105,103 @@ const BookingForm = () => {
     return total;
   }, hallPrice);
 
-  
+
+  const amountI = totalPrice;
+  const currencyI = "INR";
+  const receiptId = Math.floor(Math.random() * Date.now()).toString();
+
+  // // adding bill items to notes to send it to razorpay
+  // let notes = [...cart].reduce((acc, cur) => {
+  //   acc['items'] += cur.name + "/";
+  //   acc['quantity'] += cur.quantity.toString() + "/";
+  //   acc['price'] += cur.price.toString() + "/";
+  //   return acc
+  // }, { items: "", quantity: "", price: "" })
+
+  // loading necessary razorpay script
+  function loadScript(src) {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  }
+
+  const paymentHandler = async (notes) => {
+
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    const response = await fetch(`https://event-planner-app-backend-y35i.onrender.com/order/createOrder`, {
+      method: "POST",
+      body: JSON.stringify({
+        amount: amountI * 100,
+        currency: currencyI,
+        receipt: receiptId,
+        notes: { "Message": "Payment done." },
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+
+    const order = await response.json();
+
+    const options = {
+      key: "rzp_test_VfwuReyozf2gOX", // Enter the Key ID generated from the Dashboard
+      amount: order.amount.toString(),
+      currency: order.currency,
+      name: "Customer",
+      description: "Test Transaction",
+      image: '',
+      order_id: order.id,
+      handler: async function (response) {
+        const data = {
+          orderCreationId: order.id,
+          razorpayPaymentId: response.razorpay_payment_id,
+          razorpayOrderId: response.razorpay_order_id,
+          razorpaySignature: response.razorpay_signature,
+          userId,
+          notes: notes
+        };
+        console.log(data);
+        const result = await axios.post(`https://event-planner-app-backend-y35i.onrender.com/order/success`, data);
+        if (result.data.msg === "success") {
+          toast.success("Payment Successful")
+          window.scrollTo({ top: 0, behavior: "smooth" })
+          navigate("/")
+        }
+        else {
+          toast.error("Payment Failed")
+        }
+      },
+      prefill: {
+        name: "Test App",
+        email: "testemail.nishant@gmail.com",
+        contact: "9999999999",
+      },
+      notes: {
+        address: "Razorpay Inc.",
+      },
+      theme: {
+        color: "#61dafb",
+      },
+    };
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  }
   return (
 
     <div className='w-full bg-[#fffbfb] flex justify-center py-10'>
@@ -130,20 +230,10 @@ const BookingForm = () => {
           <div className=' flex flex-col sm:flex-row justify-between my-2'>
 
             <div>
-              <label htmlFor="firstname" className='text-md sm:text-lg'>First Name :</label>
-              <input type="text" name="firstName" id="firstname" placeholder='' value={formik.values.firstName} className='border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[69%] sm:w-[23vw] text-sm sm:text-md' onChange={formik.handleChange} />
+              <label htmlFor="fullname" className='text-md sm:text-lg'>Full Name :</label>
+              <input type="text" name="fullname" id="fullname" placeholder='' value={formik.values.fullname} className='border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[69%] sm:w-[23vw] text-sm sm:text-md' onChange={formik.handleChange} />
             </div>
 
-            <div>
-              <label htmlFor="lastname" className='text-md sm:text-lg'>Last Name : </label>
-              <input type="text" name="lastName" id='lastname' placeholder='' value={formik.values.lastName} className='border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[69%] sm:w-[23vw]  text-sm sm:text-md' onChange={formik.handleChange} />
-            </div>
-
-          </div>
-
-          <div>
-            <label htmlFor="address" className='text-md sm:text-lg mb-2'>Resident Address :</label>
-            <input type="text" name="address" value={formik.values.address} id='address' placeholder='' className='border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[55%] sm:w-[82.6%]  text-sm sm:text-md' onChange={formik.handleChange} />
           </div>
 
           <div className=' flex flex-col sm:flex-row justify-between my-2'>
@@ -292,41 +382,37 @@ const BookingForm = () => {
                     </div>
                     <div className='mb-2'>
                       <span className='font-semibold'>Name : </span>
-                      <span>Xavier Johnson</span>
-                    </div>
-                    <div className='mb-2'>
-                      <span className='font-semibold'>Address : </span>
-                      <span>123 AnyDistrict AnyState</span>
+                      <span>{notes.fullname}</span>
                     </div>
                     <div className='mb-2'>
                       <span className='font-semibold'>Email ID : </span>
-                      <span>abcde@gmail.com</span>
+                      <span>{notes.email}</span>
                     </div>
                     <div className='mb-2'>
                       <span className='font-semibold'>Contact No. : </span>
-                      <span>+91 9876541230</span>
+                      <span>{notes.contactNo}</span>
                     </div>
                   </div>
                   <div className="w-full sm:w-[45%] text-sm sm:text-base">
                     <div className='mb-2'>
                       <span className='font-semibold'>Event Date : </span>
-                      <span> 12-12-2024 </span>
+                      <span>{notes.eventDate}</span>
                     </div>
                     <div className='mb-2'>
                       <span className='font-semibold'>Event Time : </span>
-                      <span> 8:00AM - 12:00PM </span>
+                      <span> {notes.startTime}-{notes.endTime}</span>
                     </div>
                     <div className='mb-2'>
                       <span className='font-semibold'>Hall Capacity : </span>
-                      <span>1200 Members</span>
+                      <span>{notes.capacity}</span>
                     </div>
                     <div className='mb-2'>
                       <span className='font-semibold'>Hall Address : </span>
-                      <span> 123 Main Street, Anytown, USA</span>
+                      <span> {notes.hallAddress}</span>
                     </div>
                     <div className='mb-2'>
                       <span className='font-semibold'>Event Category : </span>
-                      <span> Birthday </span>
+                      <span> {notes.eventCategory} </span>
                     </div>
                   </div>
                 </div>
@@ -373,7 +459,7 @@ const BookingForm = () => {
 
                 </div>
 
-                <div className='text-center'>
+                <div className='text-center' onClick={() => paymentHandler(notes)}>
                   <input type="submit" className='bg-[#FF5880] rounded-full px-10 py-2 mt-4 text-white text-lg hover:bg-[#ec4d72] font-semibold cursor-pointer' value="Click to Pay" />
                 </div>
 
