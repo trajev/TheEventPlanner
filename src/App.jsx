@@ -16,38 +16,39 @@ import Halls from "./Components/Halls";
 import Browsehalls from "./Components/Browsehalls";
 
 import { ToastContainer } from "react-toastify";
-
+import MyBookings from "./Components/MyBookings";
 
 function App() {
   const navigate = useNavigate();
   const { userToken, logout } = useUserContext();
 
-
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden bg-[#FFFBFB]">
 
-      <WebNavbar />
+        <WebNavbar />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/occasionhubs" element={<Halls />} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/occasionhubs" element={<Halls />} />
 
-        <Route path="/contactus" element={<ContactUs />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        
-        <Route path="/halls" element={<Halls />} />
-        <Route path="/browsehalls" element={<Browsehalls />} />
-        <Route path="/ourprices" element={<Ourprices />} />
-        <Route path="/booking/:name" element={<BookingForm />} />
+          <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/profile" element={<ProfilePage />} />
+
+          <Route path="/halls" element={<Halls />} />
+          <Route path="/browsehalls" element={<Browsehalls />} />
+          <Route path="/ourprices" element={<Ourprices />} />
+          <Route path="/booking/:name" element={<BookingForm />} />
+          <Route path="/mybookings" element={<MyBookings />} />
 
 
-      </Routes>
-      <ToastContainer />
+        </Routes>
+        <ToastContainer />
 
-      <Footer />
+        <Footer />
+
     </div>
   );
 }

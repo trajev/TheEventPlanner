@@ -4,10 +4,13 @@ import data from '../utils/data';
 import { useFormik } from 'formik';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useUserContext } from '../Contexts/UserContext';
 
 const BookingForm = () => {
 
   const { name } = useParams();
+
+  const { userId } = useUserContext();
 
   const [showBill, setShowBill] = useState(false);
   const filterdata = data.filter(item => item.name === name);
@@ -25,6 +28,12 @@ const BookingForm = () => {
   //formik handling 
   const formik = useFormik({
     initialValues: {
+      userId,
+      hallName: filterdata[0].name,
+      hallType: filterdata[0].type,
+      capacity: filterdata[0].capacity,
+      image:filterdata[0].imageUrl, 
+      hallAddress: filterdata[0].location,
       firstName: "",
       lastName: "",
       address: "",
@@ -49,10 +58,20 @@ const BookingForm = () => {
         setShowBill(false);
         return;
       }
+      
+      if( !values.email.includes("@gmail.com") ){
+        toast.error("Enter a valid email address");
+        return;
+      }
+      
+      if( values.contactNo.toString().length!==10 ){
+        toast.error("Enter a valid contact number");
+        return;
+      }
 
       setShowBill(true);
-      formik.values = { ...formik.values, capacity: filterdata[0].capacity, hallAddress: filterdata[0].location }
-      console.log("formik data: ", formik.values);
+      formik.values = { ...formik.values }
+      console.log("formik data: ", formik.values );
       toast.success("Bill generated successfully");
     }
   });
@@ -60,11 +79,6 @@ const BookingForm = () => {
   const handleServiceChange = (e) => {
     const { name, checked } = e.target;
     formik.setFieldValue(`services.${name}`, checked);
-  };
-
-
-  const handleGenerateBill = () => {
-
   };
 
 
@@ -141,7 +155,7 @@ const BookingForm = () => {
 
             <div>
               <label htmlFor="contactno" className='text-md sm:text-lg'>Contact Number : </label>
-              <input type="text" name="contactNo" id='contactno' value={formik.values.contactNo} placeholder='' className=' border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[55.5%] sm:w-[20vw]  text-sm sm:text-md' onChange={formik.handleChange} />
+              <input type="number" name="contactNo" id='contactno' value={formik.values.contactNo} placeholder='' className=' border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[55.5%] sm:w-[20vw]  text-sm sm:text-md' onChange={formik.handleChange} />
             </div>
 
           </div>
@@ -177,17 +191,17 @@ const BookingForm = () => {
 
             <div>
               <label htmlFor="eventdate" className=' text-md sm:text-lg font-semibold'>Event Date : </label>
-              <input type="text" id="eventdate" name="eventDate" placeholder='' autoComplete='off' className='border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[50vw] sm:w-[10vw]  text-sm sm:text-md' value={formik.values.eventDate} onChange={formik.handleChange} />
+              <input type="date" id="eventdate" name="eventDate" placeholder='' autoComplete='off' className='border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[50vw] sm:w-[10vw]  text-sm sm:text-md' value={formik.values.eventDate} onChange={formik.handleChange} />
             </div>
 
             <div>
               <label htmlFor="starttime" className='text-md sm:text-lg font-semibold'> Start Time : </label>
-              <input type="text" id='startIime' name="startTime" placeholder='' className=' border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[51vw] sm:w-[10vw]  text-sm sm:text-md' value={formik.values.startTime} onChange={formik.handleChange} />
+              <input type="time" id='startIime' name="startTime" placeholder='' className=' border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[51vw] sm:w-[10vw]  text-sm sm:text-md' value={formik.values.startTime} onChange={formik.handleChange} />
             </div>
 
             <div>
               <label htmlFor="endtime" className='text-md sm:text-lg font-semibold'> End Time : </label>
-              <input type="text" id='endtime' name="endTime" placeholder='' className=' border-b border-black pl-2 bg-transparent mx-2 focus:outline-none sm:w-[10vw] w-[53vw] text-sm sm:text-md' value={formik.values.endTime} onChange={formik.handleChange} />
+              <input type="time" id='endtime' name="endTime" placeholder='' className=' border-b border-black pl-2 bg-transparent mx-2 focus:outline-none sm:w-[10vw] w-[53vw] text-sm sm:text-md' value={formik.values.endTime} onChange={formik.handleChange} />
             </div>
 
           </div>

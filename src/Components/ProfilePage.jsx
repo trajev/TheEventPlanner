@@ -62,12 +62,15 @@ const ProfilePage = () => {
               <h3>Profile</h3>
             </div>
             <div className="card-body">
-              <div className="profile-pic-container text-center">
+              <div className="profile-pic-container flex justify-center items-center gap-2 mb-2">
                 <img
-                  src={userData.profilePic || "path/to/default/profile-pic.jpg"}
+                  src={ userData.profilePic || "src/assets/ProfilePic.png" }
+                  // src="src/assets/ProfilePic.png"
+                  
                   alt="Profile"
-                  className="img-fluid profile-pic"
+                  className="img-fluid profile-pic w-28  "
                 />
+                
                 {editMode && (
                   <div className="mb-3">
                     <label htmlFor="profilePic" className="form-label">
@@ -136,20 +139,6 @@ const ProfilePage = () => {
                     id="email"
                     name="email"
                     value={userData.emailId}
-                    onChange={handleInputChange}
-                    readOnly={!editMode}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="sports" className="form-label">
-                    Sports
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="sports"
-                    name="sports"
-                    value={userData.sports}
                     onChange={handleInputChange}
                     readOnly={!editMode}
                   />

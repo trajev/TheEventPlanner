@@ -45,6 +45,14 @@ const WebNavbar = () => {
     const handleMouseUp4 = () => {
         setClicked4(false);
     };
+    
+    const [clicked5, setClicked5] = useState(false);
+    const handleMouseDown5 = () => {
+        setClicked5(true);
+    };
+    const handleMouseUp5 = () => {
+        setClicked5(false);
+    };
 
     const { userToken, logout } = useUserContext();
     
@@ -102,6 +110,14 @@ const WebNavbar = () => {
                                         style={{ backgroundColor: clicked3 ? "#FF5880" : "white", color: clicked3? "white":"black", fontSize: "16px" }} 
                                         >
                                             Profile
+                                        </Dropdown.Item>
+                                        <Dropdown.Item
+                                        onMouseDown={handleMouseDown5}
+                                        onMouseUp={handleMouseUp5}
+                                        onClick={() => navigate("/mybookings")}
+                                        style={{ backgroundColor: clicked5 ? "#FF5880" : "white", color: clicked5? "white":"black", fontSize: "16px" }} 
+                                        >
+                                            My Bookings
                                         </Dropdown.Item>
                                         <Dropdown.Item
                                             onMouseDown={handleMouseDown4}
