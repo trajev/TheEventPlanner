@@ -14,7 +14,7 @@ const Halls = () => {
     }, []);
 
     return (<>
-        <section data-aos="fade-up" className='h-[95vh] my-10 bg-[url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmyeventorganizers.com%2Fwp-content%2Fuploads%2F2019%2F02%2F12340547467e093795.jpg&f=1&nofb=1&ipt=8316990b07399ebf3ba6181b7c4489333676c251ab86e0180e3ae6c504c58adc&ipo=images")] bg-bottom bg-cover bg-fixed  w-screen flex items-center'>
+        <section className='h-[95vh] my-10 bg-[url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmyeventorganizers.com%2Fwp-content%2Fuploads%2F2019%2F02%2F12340547467e093795.jpg&f=1&nofb=1&ipt=8316990b07399ebf3ba6181b7c4489333676c251ab86e0180e3ae6c504c58adc&ipo=images")] bg-bottom bg-cover bg-fixed  w-screen flex items-center'>
 
 
             <div className='text-white bg-[#0d0d0d65] w-full h-full flex flex-col items-center justify-center  gap-10'>
