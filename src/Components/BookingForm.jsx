@@ -148,7 +148,7 @@ const BookingForm = () => {
   }
 
   const paymentHandler = async (notes) => {
-    alert("Payment Initiated")
+    alert("Payment Initiated. Please wait...")
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
