@@ -83,7 +83,8 @@ const BookingForm = () => {
       setnotes(formik.values)
       setOrderId(uuidv4());
       console.log("formik data: ", formik.values, formik.values.userId);
-      toast.success("Bill generated successfully");
+      alert("Bill generated successfully");
+      window.scrollY(100, { behavior: 'smooth' })
     }
   });
 
@@ -109,14 +110,14 @@ const BookingForm = () => {
     invitations: 8000,
     transportation: 15000,
   };
-  
+
   const totalPrice = Object.entries(formik.values.services).reduce((total, [service, selected]) => {
     if (selected) {
       return total + servicePrices[service];
     }
     return total;
   }, hallPrice);
-  
+
 
 
   const amountI = totalPrice;
@@ -147,7 +148,7 @@ const BookingForm = () => {
   }
 
   const paymentHandler = async (notes) => {
-
+    alert("Payment Initiated")
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
@@ -163,7 +164,7 @@ const BookingForm = () => {
         amount: amountI * 100,
         currency: currencyI,
         receipt: receiptId,
-        notes: { "Message": "Payment done." },
+        notes: { "Message": "Payment initiated." },
       }),
       headers: {
         "Content-Type": "application/json"
@@ -231,7 +232,7 @@ const BookingForm = () => {
             </div>
             <div>
               <label className=' text-md sm:text-lg'>Order ID :</label>
-              <input type="orderid" placeholder='' className='border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[40vw] sm:w-[17vw] text-sm sm:text-md' readOnly value={ orderId } />
+              <input type="orderid" placeholder='' className='border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[40vw] sm:w-[17vw] text-sm sm:text-md' readOnly value={orderId} />
             </div>
           </div>
         </div>

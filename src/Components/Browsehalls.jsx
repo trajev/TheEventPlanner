@@ -56,7 +56,7 @@ const Browsehalls = () => {
         ))}
       </div>
 
-      <div className='w-[80%] flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-10 '>
+      <div className='w-[95%] flex flex-col sm:flex-row flex-wrap justify-center gap-2 sm:gap-10 '>
         {(filteredData.length > 0) ?
           filteredData.map((item) => {
             return <HallCard imageUrl={item.imageUrl} name={item.name} location={item.location} type={item.type} rating={item.rating} numberOfRooms={item.numberOfRooms} capacity={item.capacity} />

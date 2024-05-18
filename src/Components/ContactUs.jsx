@@ -1,11 +1,20 @@
 import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import Aos from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 import { useFormik } from 'formik';
 
 const ContactUs = () => {
-
+    useEffect(() => {
+        Aos.init({
+            offset: 200,
+            duration: 600,
+            easing: "ease-in-sine",
+            delay: 100,
+        });
+    }, []);
     const formik = useFormik({
         initialValues: {
             name: "",
@@ -76,7 +85,7 @@ const ContactUs = () => {
     }
 
     return (
-        <section className="flex flex-col items-center py-8 sm:py-10 bg-[#FFFBFB]">
+        <section data-aos="fade-up" className="flex flex-col items-center py-8 sm:py-10 bg-[#FFFBFB]">
             <ToastContainer />
             <h1 className='text-center font-semibold text-2xl sm:text-4xl uppercase'>Contact Us</h1>
             <h4 className='text-zinc-400 text-md w-[70%] text-center sm:text-xl my-4 capitalize'>Feel Free to contact us. Get your doubts clarified.</h4>
