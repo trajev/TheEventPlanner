@@ -7,6 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useUserContext } from '../Contexts/UserContext';
 import axios from "axios"
 
+import { v4 as uuidv4 } from 'uuid';
+
 const BookingForm = () => {
   const navigate = useNavigate()
   const { name } = useParams();
@@ -14,6 +16,8 @@ const BookingForm = () => {
   const { userId } = useUserContext();
 
   const [showBill, setShowBill] = useState(false);
+  const [orderId, setOrderId] = useState(uuidv4());
+
   const filterdata = data.filter(item => item.name === name);
 
 
@@ -77,6 +81,7 @@ const BookingForm = () => {
       setShowBill(true);
       formik.values = { ...formik.values }
       setnotes(formik.values)
+      setOrderId(uuidv4());
       console.log("formik data: ", formik.values, formik.values.userId);
       toast.success("Bill generated successfully");
     }
@@ -96,14 +101,22 @@ const BookingForm = () => {
   }
 
   const hallPrice = 12000; // Default hall price
-
-  const totalPrice = Object.values(services).reduce((total, service) => {
-    if (service) {
-      // Add the price of selected services to the total
-      return total + servicePrice(service);
+  const servicePrices = {
+    decoration: 10000,
+    foodCatering: 25000,
+    entertainment: 20000,
+    photography: 30000,
+    invitations: 8000,
+    transportation: 15000,
+  };
+  
+  const totalPrice = Object.entries(formik.values.services).reduce((total, [service, selected]) => {
+    if (selected) {
+      return total + servicePrices[service];
     }
     return total;
   }, hallPrice);
+  
 
 
   const amountI = totalPrice;
@@ -218,7 +231,7 @@ const BookingForm = () => {
             </div>
             <div>
               <label className=' text-md sm:text-lg'>Order ID :</label>
-              <input type="orderid" placeholder='' className='border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[40vw] sm:w-[17vw] text-sm sm:text-md' readOnly value={123} />
+              <input type="orderid" placeholder='' className='border-b border-black pl-2 bg-transparent mx-2 focus:outline-none w-[40vw] sm:w-[17vw] text-sm sm:text-md' readOnly value={ orderId } />
             </div>
           </div>
         </div>
@@ -425,23 +438,23 @@ const BookingForm = () => {
                         <td className='w-[50%] sm:w-[80%] text-md sm:text-lg ' > Hall Price</td>
                         <td className='w-[50%] sm:text-left text-right sm:w-[20%]  text-sm sm:text-base' > {formatPrice(12000)} &#x20B9;</td>
                       </tr>
-                      {(services.decoration) && <tr>
+                      {(formik.values.services.decoration) && <tr>
                         <td className='w-[50%] sm:w-[80%] text-md sm:text-lg' > Decoration Services </td>
                         <td className='w-[50%] sm:text-left text-right sm:w-[20%] text-sm sm:text-base' > {formatPrice(10000)} &#x20B9; </td>
                       </tr>}
-                      {(services.foodCatering) && <tr>
+                      {(formik.values.services.foodCatering) && <tr>
                         <td className='w-[50%] sm:w-[80%] text-md sm:text-lg' > Food Catering </td>
                         <td className='w-[50%] sm:text-left text-right sm:w-[20%] text-sm sm:text-base' > {formatPrice(25000)} &#x20B9; </td>
                       </tr>}
-                      {(services.entertainment) && <tr>
+                      {(formik.values.services.entertainment) && <tr>
                         <td className='w-[50%] sm:w-[80%] text-md sm:text-lg' > Entertainment </td>
                         <td className='w-[50%] sm:text-left text-right sm:w-[20%] text-sm sm:text-base' > {formatPrice(20000)} &#x20B9; </td>
                       </tr>}
-                      {(services.photography) && <tr>
+                      {(formik.values.services.photography) && <tr>
                         <td className='w-[50%] sm:w-[80%] text-md sm:text-lg' > Photography/Videography Services</td>
                         <td className='w-[50%] sm:text-left text-right sm:w-[20%] text-sm sm:text-base' > {formatPrice(8000)} &#x20B9; </td>
                       </tr>}
-                      {(services.transportation) && <tr>
+                      {(formik.values.services.transportation) && <tr>
                         <td className='w-[50%] sm:w-[80%] text-md sm:text-lg' > Transportation </td>
                         <td className='w-[50%] sm:text-left text-right sm:w-[20%] text-sm sm:text-base' > {formatPrice(15000)} &#x20B9; </td>
                       </tr>}

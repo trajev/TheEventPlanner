@@ -78,7 +78,7 @@ const WebNavbar = () => {
                         <Nav.Link onClick={() => { navigate("/") }} > <img src="https://images.vexels.com/media/users/3/145234/isolated/preview/931cd261ad78d0c4f0b2ceda893e142b-event-planning-logotype-by-vexels.png" alt="logo" className="h-16 object-cover scale-100 sm:scale-150 cursor-pointer w-28 " /> </Nav.Link>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Navbar.Collapse id="navbarScroll" className="navmain">
+                    <Navbar.Collapse id="navbarScroll" className="navmain ">
                         <Nav
                             className="me-auto my-2 my-lg-0 navlink "
                             style={{ maxHeight: "200px" }}
@@ -95,7 +95,7 @@ const WebNavbar = () => {
                                 // style={{backgroundColor:"#FF5880" , border:"none", focus:{border:}}}
                                 variant="secondary"
                                 id="dropdown-basic"
-                                className="username bg-[#FF5880] border-none "
+                                className="username bg-[#FF5880] border-none mb-6 sm:mb-0"
                             >
                                 User &nbsp;
                             </Dropdown.Toggle>

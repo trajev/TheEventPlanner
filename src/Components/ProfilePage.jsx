@@ -56,7 +56,7 @@ const ProfilePage = () => {
   return (
     <div className="container mt-5">
       <div className="row">
-        <div className="col-md-6 offset-md-3">
+        <div className="col-md-6 offset-md-3 flex justify-center">
           <div className="card">
             <div className="card-header">
               <h3>Profile</h3>
