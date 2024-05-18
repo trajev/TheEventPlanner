@@ -1,16 +1,28 @@
 import { Link } from "react-router-dom"
-
+import Aos from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 const Ourprices = () => {
+    useEffect(() => {
+        Aos.init({
+            offset: 200,
+            duration: 600,
+            easing: "ease-in-sine",
+            delay: 100,
+        });
+    }, []);
+
     return (
-        <section className=' bg-[#FFFBFB] flex flex-col items-center pt-10' >
-            <h1 className='text-center font-semibold text-2xl sm:text-4xl uppercase'>Our Prices</h1>
-            <h4 className='text-zinc-400 text-md w-[70%] text-center sm:text-xl my-4 '>Affordable rates for unforgettable events—your dream celebration made real.</h4>
+        <section
+            data-aos="fade-up" className=' bg-[#FFFBFB] flex flex-col items-center pt-10' >
+            <h1 className='text-center font-semibold text-2xl lg:text-4xl uppercase'>Our Prices</h1>
+            <h4 className='text-zinc-400 text-lg w-[70%] text-center lg:text-xl my-4 '>Affordable rates for unforgettable events—your dream celebration made real.</h4>
             <div className='w-20 h-1.5 bg-[#FF5880]'></div>
 
-            <div className='w-[70%] my-12 flex  flex-col gap-10 sm:flex-row justify-between '>
+            <div className='w-[70%] my-12 flex  flex-col gap-10 lg:flex-row justify-between '>
 
-                <div className='w-full sm:w-[30%]  rounded-lg border shadow-lg hover:shadow-2xl hover:scale-105 transition-transform transform duration-500'>
+                <div className='w-full lg:w-[30%]  rounded-lg border shadow-lg hover:shadow-2xl hover:scale-105 transition-transform transform duration-500'>
                     <div className='flex flex-col items-center'>
                         <h2 className='text-zinc-500 font-semibold mt-4 mb-3 uppercase'>For birthdays</h2>
                         <h2 className='text-4xl italic text-center'> 40,000 &#x20B9; </h2>
@@ -32,7 +44,7 @@ const Ourprices = () => {
                     </div>
                 </div>
 
-                <div className='w-full sm:w-[30%]   rounded-lg border shadow-lg hover:shadow-2xl hover:scale-105 transition-transform transform duration-500'>
+                <div className='w-full lg:w-[30%]   rounded-lg border shadow-lg hover:shadow-2xl hover:scale-105 transition-transform transform duration-500'>
                     <div className='flex flex-col items-center'>
                         <h2 className='text-zinc-500 font-semibold mt-4 mb-3 uppercase'>For Weddings</h2>
                         <h2 className='text-4xl italic text-center'> 90,000 &#x20B9; </h2>
@@ -54,7 +66,7 @@ const Ourprices = () => {
                     </div>
                 </div>
 
-                <div className='w-full sm:w-[30%]   rounded-lg border shadow-lg hover:shadow-2xl hover:scale-105 transition-transform transform duration-500'>
+                <div className='w-full lg:w-[30%]   rounded-lg border shadow-lg hover:shadow-2xl hover:scale-105 transition-transform transform duration-500'>
                     <div className='flex flex-col items-center'>
                         <h2 className='text-zinc-500 font-semibold mt-4 mb-3 uppercase'>For Others</h2>
                         <h2 className='text-4xl italic text-center'> 1,50,000 &#x20B9; </h2>

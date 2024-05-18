@@ -16,15 +16,6 @@ input[type=number]::-webkit-outer-spin-button {
   margin: auto;
 }
 
-.searchIconP {
-  position: relative;
-}
-
-.search {
-  border-radius: 20px;
-  margin-right: 3vw;
-}
-
 .userImg {
   position: absolute;
   top: 13px;
@@ -41,37 +32,14 @@ input[type=number]::-webkit-outer-spin-button {
   /* margin-left: 50px; */
 }
 
-.iconSearch {
-  position: absolute;
-  left: 20vw;
-  padding: 8px;
-  color: rgb(104, 139, 139);
-}
 
 @media (min-width:992px) {
   .navmain {
-    position: absolute;
     right: 30px;
   }
 
   .navlink {
-    position: absolute;
-    left: -30vw;
-    gap: 1.5vw;
-  }
-
-  .search {
-    width: 18vw;
-    position: relative;
-    margin: auto;
-    margin-right: 10px;
-  }
-
-  .iconSearch {
-    position: absolute;
-    left: 15.4vw;
-    padding: 9px;
-    cursor: pointer;
+    gap: 1vw;
   }
 
   .add-User {
