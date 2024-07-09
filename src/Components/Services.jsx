@@ -19,7 +19,7 @@ const Services = () => {
 
         <div className=' w-[44%] sm:w-[30%] flex flex-col items-center'>
           {/* <img src="https://youmeandtrends.com/wp-content/uploads/2015/11/wedding-stage-decoration-with-flowers.jpg" alt="service-1" className='rounded-lg w-full h-[40%] sm:h-[60%] object-cover mb-4 ' /> */}
-          <img src="../src/assets/decoration-service.jpeg" alt="service-1" className='rounded-lg w-full h-[40%] sm:h-[60%] object-cover mb-4 ' />
+          <img src="decoration-service.jpeg" alt="service-1" className='rounded-lg w-full h-[40%] sm:h-[60%] object-cover mb-4 ' />
           <h3 className='font-semibold mb-2  text-md sm:text-xl'>Decoration</h3>
           <p className='pl-3 text-sm sm:text-base'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam beatae illum consectetur quas architecto </p>
         </div>
