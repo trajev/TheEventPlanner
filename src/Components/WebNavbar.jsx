@@ -75,7 +75,7 @@ const WebNavbar = () => {
                 <Container fluid>
                     <Navbar.Brand onClick={() => navigate("/")}>
                         {/* TheEvent <TheaterComedyIcon /> */}
-                        <Nav.Link onClick={() => { navigate("/") }} > <img src="http://imagetolink.com/ib/ZGrri665F4.png" alt="logo" className="h-12 object-contain scale-100 sm:scale-150 cursor-pointer w-30 " /> </Nav.Link>
+                        <Nav.Link onClick={() => { navigate("/") }} > <img src="assets/mainlogo-bgremoved2.png" alt="logo" className="h-12 object-contain scale-100 sm:scale-150 cursor-pointer w-30 " /> </Nav.Link>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll" className="navmain ">

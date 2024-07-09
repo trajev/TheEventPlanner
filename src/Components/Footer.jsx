@@ -21,7 +21,7 @@ function Footer() {
     <div className="w-full mt-10 h-70 bg-[#333333] sm:px-14 px-2 py-6 text-white flex flex-col sm:flex-row sm:items-start sm:justify-between">
       <div className="w-full sm:w-[33%] h-full p-4 overflow-hidden">
         {/* <h1 className="text-3xl sm:text-4xl mb-6">TheEvent</h1> */}
-        <img src="http://imagetolink.com/ib/TOVArcNVWi.png" alt="logo" className=" scale-150 mb-4 mx-10 w-31 object-contain" />
+        <img src="assets/mainlogowhite-removebg.png" alt="logo" className=" scale-150 mb-4 mx-10 w-31 object-contain" />
         <p className="text-justify leading-5">
           Plan your perfect event effortlessly with our Event Planner application. From booking venues to managing guest lists, we simplify every step, ensuring a seamless experience for all your special occasions. Your dream event, just a few clicks away!
         </p>
